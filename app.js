@@ -8,7 +8,9 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const clientesRouter = require('./routes/clientes');
+const productosRouter = require('./routes/productos');
 const ClienteService = require('./services/cliente-service');
+const ProductoService = require('./services/producto-service');
 
 const app = express();
 
@@ -26,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/clientes', clientesRouter);
+app.use('/productos', productosRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -46,9 +49,15 @@ app.use((err, req, res) => {
 ClienteService.init().then((clienteService) => {
   app.set('clienteService', clienteService);
 });
+ProductoService.init().then((productoService) => {
+  app.set('productoService', productoService)
+});
 
 process.on('exit', () => {
   app.get('clienteService').closePool();
+});
+process.on('exit', () => {
+  app.get('productoService').closePool();
 });
 
 module.exports = app;
