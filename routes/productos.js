@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 const PRODUCTO_SERVICE = 'productoService';
 
 // Lista de todos los producto
-s
+
 router.get('/productos', asyncHandler(async (req, res) => {
   res.send(await res.app.get(PRODUCTO_SERVICE).getAll());
 }));
