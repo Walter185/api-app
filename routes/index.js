@@ -3,7 +3,7 @@ var router = express.Router();
 
 // Home
 router.get('/', (req, res) => {
-  res.render('index', { title: 'Doguito API' });
+  res.render('index', { title: 'Mainero API' });
 });
 
 module.exports = router;
